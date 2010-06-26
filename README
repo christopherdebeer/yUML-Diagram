@@ -1,0 +1,16 @@
+yUML Relationship Diagram Generator
+
+http://christopherdebeer.com/sandbox/yuml/
+
+And experiment with the iliketext  API, JQuery, JSONP, and yUML by Christopher de Beer of The Empire Collective © 2010.
+
+The purpose of this page is to test out the API I'm currently working on for my web app iliketext.com
+What is does (or tries to do): After user input of a word, it searches iliketext.com (using the API) for any words related to the input by way of common stems (ie: design -> designer or support -> supporting) and then looks in all the texts in which that word appears (within iliketext.com collections) and ranks the other words by way of useage.
+
+Then outputing those relationships in a UML diagram using the image request method developed by tobin harris of yuml.me
+
+SDWA : Stem defined word assosiations
+CDWA : Content defined word assosiations
+FWA : Free word assosiations
+
+A good example search (for now) is "design", "support", "work" or "network".
