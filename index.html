@@ -4,75 +4,10 @@
 <html lang="en">
 <head>
     <title>yUML Tests</title>
-    <script type="text/javascript" src="/sandbox/assets/js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/sandbox/assets/js/jquery.formLabels1.0.js"></script>
-<script>
-    
-    if(window.location.hash) {
-        wordtosearch = window.location.hash;
-        wordtosearch = wordtosearch.substring(1);
-        $("#wordtosearch").val(wordtosearch);
-        generateUML(wordtosearch);
-    }
-
-    jQuery(function(){
-        $.fn.formLabels({labelParent : 'form'});
-        $("form").submit(function(){
-            wordtosearch = $("#wordtosearch").val();
-            window.location.hash = "#" + wordtosearch;
-            generateUML(wordtosearch);
-            return false;
-        })  
-    });
-    
-    function generateUML (wordtosearch) {
-        
-        // GET SDWA
-        
-        window.urlsdwa = "http://alpha.iliketext.com/word/" + wordtosearch + "/sdwa.jsonp";
-        $.getJSON(window.urlsdwa + "&callback=?", function(data){
-            if (data.status == "ok") {
-                window.sdwa = data.sdwa;
-                window.maxsdwa = window.sdwa.length;
-                window.count = 0;
-                window.yuml = "";
-                for (window.countsdwa in window.sdwa) {
-                    
-                    if (window.countsdwa == 0) {
-                        window.yuml = "["+wordtosearch+"]";
-                    }
-                    else {
-                        window.yuml = window.yuml + ", [" + wordtosearch + "]-sdwa^[" + window.sdwa[window.countsdwa] + "]";
-                    }
-                    
-                    // GET CDWA of SDWA
-                    
-                    window.urlcdwa = "http://alpha.iliketext.com/word/" + window.sdwa[window.countsdwa] + "/cdwa.jsonp";
-                    $.getJSON(window.urlcdwa + "&callback=?", function(data2){
-                        if (data2.status == "ok") {
-                            
-                            window.cdwa = data2.cdwa;
-                            for (window.countcdwa in window.cdwa) {
-                                window.yuml = window.yuml + ", [" + data.sdwa[window.count] + "]-cdwa>[" + window.cdwa[window.countcdwa] + "]";                             
-                            }
-                            window.count++
-                            if (window.count == window.maxsdwa) {
-                                $('#result').html("<h2>Results:</h2><img src='http://yuml.me/diagram/nofunky;dir:LR;scale:60;/class/" + window.yuml +  ".png' alt='yUML Image Loading...' />");
-                            }
-                        }                                 
-                    });
-                }
-                
-            } else {
-                alert("Error " + data.error.code + ": " + data.error.msg);
-            }
-            
-        });
-    }
-    
-
-</script>
+    <script type="text/javascript" src="assets/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.formLabels1.0.js"></script>
+		<script type="text/javascript" src="assets/js/functionality.js"></script>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -86,68 +21,7 @@
   })();
 
 </script>
-    <style type="text/css">
-        body, html {
-            margin:0;
-            padding:0;
-            font:bold 11px Verdana,Geneva,sans-serif;
-        }
-        
-        #footer {
-            font:normal 9px Verdana,Geneva,sans-serif;
-        }
-        
-        #result img {
-            display:block;
-            padding:20px;
-        }
-        
-        h2 {
-            color:#666;
-            margin:10px 0;
-        }
-        
-        #wrapper {
-            width:700px;
-            margin:40px auto;
-        }
-        
-        .field {
-            margin:10px 10px 10px 0;
-            display:inline-block;
-            *display:inline;
-        }
-        
-        .field input {
-            border-color:#666666 #CCCCCC #CCCCCC;
-            border-right:1px solid #CCCCCC;
-            border-style:solid;
-            border-width:1px;
-            color:#666666;
-            font:bold 11px Verdana,Geneva,sans-serif;
-            padding:6px;
-            text-shadow:1px 1px #F4F4F4;
-            width:200px;
-        }
-        #wrapper button {
-            border-radius:7px;
-            -moz-border-radius:7px;
-            -webkit-border-radius:7px;
-            background:#444;
-            color:#fff;
-            text-shadow:0 -1px #000;
-            border:none;
-            padding:5px 15px;
-            font-weight:bold;
-            font-size:11px;
-            cursor:pointer;
-        }
-        #by {
-            margin-bottom:20px;
-        }
-        #wrapper button:hover {background:#555}
-        #wrapper button:active {background:#777; position:relative; top:1px; outline:none} 
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
     <div id="wrapper">
@@ -158,7 +32,7 @@
         </form>
         <div id="result">
         </div>
-            
+
         <div id="footer">
             <div id="by">
                 And experiment with the <a href="http://www.iliketext.com">iliketext</a> <a href="http://alpha.iliketext.com/api">API</a>, JQuery, JSONP, and <a href="http://yuml.me">yUML</a> by <a href="http://christopherdebeer.com">Christopher de Beer</a> of <a href="http://www.empirecollective.co.uk">The Empire Collective</a> &copy; 2010<br /><br />If you have any questions or feedback, just fire me an <strong>email: christopherdebeer [@] gmail [.] com</strong> <br /> or get me on <strong>twitter @christopherdb</strong>
@@ -171,9 +45,9 @@
                 FWA : Free word assosiations<br/><br/>
                 A good example search (for now) is "design", "support", "work" or "network".
             </div>
-            
+
         </div>
-        
+
     </div>
 </body>
 </html>
